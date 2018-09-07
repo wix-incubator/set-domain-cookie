@@ -1,5 +1,5 @@
 {
-  "name": "set-tld-cookie",
+  "name": "set-domain-cookie",
   "version": "1.0.2",
   "license": "UNLICENSED",
   "author": {
@@ -38,7 +38,7 @@
   },
   "yoshi": {
     "hmr": "auto",
-    "exports": "setTLDCookie",
+    "exports": "setDomainCookie",
     "entry": "index.ts"
   }
 }

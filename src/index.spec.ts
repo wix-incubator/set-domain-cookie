@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import setTLDCookie, { calcTLDCookie } from './index';
+import setDomainCookie, { calcDomainCookie } from './index';
 import { JSDOM, CookieJar } from 'jsdom';
 
 declare var global: Global;
@@ -8,11 +8,11 @@ interface Global {
   document: any;
 }
 
-describe('Set TLD Cookie', () => {
-  describe('calcTLDCookie', () => {
+describe('Set Domain Cookie', () => {
+  describe('calcDomainCookie', () => {
     it('should remove cookies in higher level domains and paths', () => {
       expect(
-        calcTLDCookie(
+        calcDomainCookie(
           { hostname: 'www.wix.com', pathname: '/account/sites' },
           'aaa',
           'bbb',
@@ -30,7 +30,7 @@ describe('Set TLD Cookie', () => {
 
     it('should remove cookies only for paths if not .com', () => {
       expect(
-        calcTLDCookie(
+        calcDomainCookie(
           { hostname: 'www.wix.co.il', pathname: '/account/sites' },
           'aaa',
           'bbb',
@@ -44,7 +44,7 @@ describe('Set TLD Cookie', () => {
     });
   });
 
-  describe('setTLDCookie', () => {
+  describe('setDomainCookie', () => {
     it('removes cookies with too specific domain/path', () => {
       const cookieJar = new CookieJar();
       cookieJar.setCookieSync(
@@ -63,7 +63,7 @@ describe('Set TLD Cookie', () => {
       global.window = dom.window;
       global.document = window.document;
 
-      setTLDCookie('aaa', 'bbb', new Date('1981-12-27T00:00:00Z'));
+      setDomainCookie('aaa', 'bbb', new Date('1981-12-27T00:00:00Z'));
       const cookies = cookieJar
         .getCookiesSync('https://www.wix.com/account/sites', {
           now: new Date('1980-01-01T00:00:00Z'),

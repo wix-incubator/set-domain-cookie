@@ -14,7 +14,7 @@ function calcSubstrings(str, separator, prefix) {
   return result;
 }
 
-export function calcTLDCookie(location, name, value, expires): string[] {
+export function calcDomainCookie(location, name, value, expires): string[] {
   let domains = calcSubstrings(location.hostname, '.', false);
   const paths = calcSubstrings(location.pathname, '/', true);
   const result = [];
@@ -37,8 +37,8 @@ export function calcTLDCookie(location, name, value, expires): string[] {
   return result;
 }
 
-export default function setTLDCookie(name, value, expires) {
-  calcTLDCookie(window.location, name, value, expires).forEach(cookie => {
+export default function setDomainCookie(name, value, expires) {
+  calcDomainCookie(window.location, name, value, expires).forEach(cookie => {
     document.cookie = cookie;
   });
 }
